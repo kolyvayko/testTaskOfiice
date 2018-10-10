@@ -89,14 +89,14 @@ func countUnheppiPoints(rows,columns int, permutation string) (count int){
 func findAllPermitations(rows, columns, peoples int) (permutations []string){
 	roomsCount := rows*columns
 	for i := 0; i <= int(math.Pow(2, float64(roomsCount))); i++{
-		variant:= strconv.FormatInt(int64(i),2)
-		if len(variant)< rows*columns{
-			variant = strings.Repeat("0", rows*columns-len(variant))
-		}
-		if res:=checkCount(variant,peoples); res{
-			permutations = append(permutations, variant)
-			//fmt.Println(permutations)
-		}
+			variant:= strconv.FormatInt(int64(i),2)
+			if len(variant)< rows*columns{
+				variant = strings.Repeat("0", rows*columns-len(variant))
+			}
+			if res:=checkCount(variant,peoples); res{
+				permutations = append(permutations, variant)
+				//fmt.Println(permutations)
+			}
 	}
 	return
 }
