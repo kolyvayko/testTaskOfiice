@@ -14,19 +14,15 @@ func main(){
 	peoples := flag.Int("peoples", 0, "Peoples count.")
 
 	flag.Parse()
-	//fmt.Println(*rows)
-	//fmt.Println(*columns)
-	//fmt.Println(*peoples)
-	//fmt.Println(flag.Args())
-
 
 	num, err := findUnhappyPoints(*rows,*columns,*peoples)
-	fmt.Println("Count unheppi points: ",num)
+	fmt.Println("Count unhappy points: ",num)
 	if err != ""{fmt.Println(err)}
 
 }
 
 func findUnhappyPoints(rows, columns, peoples int) (num int, err string){
+	permutation := ""
 	switch {
 	case rows <= 0:
 		return 0, "Rows not valid"
@@ -35,7 +31,8 @@ func findUnhappyPoints(rows, columns, peoples int) (num int, err string){
 	case peoples > rows*columns:
 		return 0, "Peoples count to match"
 	default:
-		_,num = findBestPermutation(rows,columns,peoples)
+		permutation,num = findBestPermutation(rows,columns,peoples)
+		fmt.Println(permutation)
 		err = ""
 	}
 	return
@@ -49,7 +46,6 @@ func findBestPermutation(rows,columns,peoples int)(permutation string, count int
 		count =rows*columns*2
 		for _, p:=range permutations{
 			c := countUnheppiPoints(rows,columns,p)
-
 			if c < count{
 				count = c
 				permutation = p
@@ -107,7 +103,6 @@ func findAllPermitations(rows, columns, peoples int) (permutations []string){
 func checkCount(item string, people int) (result bool){
 	count :=0
 	for _, elem:= range item{
-
 		if fmt.Sprintf("%c",elem) == "1"{
 			count +=1
 		}
