@@ -28,7 +28,7 @@ func findMinUP(rows, columns, peoples int) (num int, err string) {
 	maxUP := (rows-1)*((columns-1)*2+1) + (columns - 1)
 	square := rows * columns
 	empty := square - peoples
-	fmt.Println("Rows: ", rows, "Columns: ", columns, "Empty: ", empty, "maxUP: ", maxUP)
+	//fmt.Println("Rows: ", rows, "Columns: ", columns, "Empty: ", empty, "maxUP: ", maxUP)
 
 	if rows == 0 || columns == 0 {
 		num = 0
@@ -48,64 +48,14 @@ func findMinUP(rows, columns, peoples int) (num int, err string) {
 		num = 2
 	} else if rows == 1 || columns == 1 {
 		num = maxUP - 2*empty
-		//} else if (rows == empty+1 || columns == empty+1) && (rows > empty+2 || columns > empty+2) {
-		//	num = maxUP - (4*empty - 1)
 	} else {
-		//num = getMinUP(rows, columns, maxUP, empty)
 		num, _ = findUnhappyPoints(rows, columns, peoples)
 	}
 	return
 }
 
-func getMinUP(rows, columns, maxUP, empty int) (num int) { //TODO: make O(1)
-	if empty == 1 {
-		if rows == (empty+1) && columns == (empty+1) { //2
-			num = maxUP - (4*empty - empty - 1) //2
-		} else if rows == (empty+1) || columns == (empty+1) { //2
-			num = maxUP - (4*empty - empty) //3
-		} else {
-			num = maxUP - 4*empty //4
-		}
-	} else if empty == 2 {
-		if rows == 2 || columns == 2 {
-			if rows == (empty+1) || columns == (empty+1) { //3
-				num = maxUP - (4*empty - (empty + 1)) //3
-			} else {
-				num = maxUP - (4*empty - empty) //6
-			}
-		} else if rows == 3 && columns == 3 {
-			num = maxUP - (4*empty - empty) //6
-		} else if (rows == 3 || columns == 3) && (rows == 4 || columns == 4) {
-			num = maxUP - (4*empty - int(math.Pow(float64(empty), 0))) //7
-		} else {
-			num = maxUP - 4*empty
-		}
-	} else if empty == 3 {
-		if rows == 2 || columns == 2 {
-			if rows == 3 || columns == 3 {
-				num = maxUP - empty*3 - 2
-			} else {
-				num = maxUP - empty*3
-			}
-		} else if rows == 3 || columns == 3 {
-
-		}
-	} else if empty == 4 {
-		if rows == 2 || columns == 2 {
-			if rows == 5 || columns == 5 {
-				num = maxUP - 11
-			} else {
-				num = maxUP - 12
-			}
-		} else {
-			num = maxUP - 4*empty
-		}
-	}
-	return
-}
-
 func findUnhappyPoints(rows, columns, peoples int) (num int, err string) {
-	permutation := ""
+	//permutation := ""
 	switch {
 	case rows <= 0:
 		return 0, "Rows not valid"
@@ -114,8 +64,8 @@ func findUnhappyPoints(rows, columns, peoples int) (num int, err string) {
 	case peoples > rows*columns:
 		return 0, "Peoples count to match"
 	default:
-		permutation, num = findBestPermutation(rows, columns, peoples)
-		fmt.Println(permutation)
+		_, num = findBestPermutation(rows, columns, peoples)
+		//fmt.Println(permutation)
 		err = ""
 	}
 	return
